@@ -2,11 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "student.h"
-#include "librarian.h"
 #include "read.h"
+#include "librarian.h"
 #include "print.h"
-
+#include "student.h"
 void addBook(char* name, char* booknum, char* auth, int quan)
 {
 	BOOK *pTemp = (BOOK*)malloc(sizeof(BOOK));
@@ -29,7 +28,7 @@ void addBook(char* name, char* booknum, char* auth, int quan)
 
 void listUser()
 {
-	STDU* pTemp = sHead;
+	STUD* pTemp = sHead;
 	studHeaderPrint();
 	while(pTemp != NULL)
 	{

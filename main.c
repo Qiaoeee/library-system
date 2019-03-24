@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "student.h"
-#include "librarian.h"
 #include "read.h"
+#include "librarian.h"
 #include "print.h"
+#include "student.h"
 
 int main(int argc, char *argv[]) 
 {
@@ -18,12 +18,12 @@ int main(int argc, char *argv[])
 		case 1:
 			readBook();
 			readStud();
+			if(0 ==logIn())
+			{
+				break;
+			}
 			while(0 != return1)
 			{
-				if(1 != logIn())
-				{
-					break;
-				}
 				PrintStudent();
 				scanf("%d", &order1);
 				return1 = OperateStudent(order1);

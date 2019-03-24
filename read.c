@@ -2,10 +2,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "student.h"
-#include "librarian.h"
 #include "read.h"
+#include "librarian.h"
 #include "print.h"
+#include "student.h"
+// creat head pointers and tail pointers for two linked lists separately.
+BOOK *bHead = NULL;
+BOOK *bTail = NULL;
+STUD *sHead = NULL;
+STUD *sTail = NULL;
+
 void readStud()
 {
 	FILE* pStuFile = fopen("student.txt", "rb+");

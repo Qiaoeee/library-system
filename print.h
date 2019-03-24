@@ -1,5 +1,5 @@
-#ifdef _PRINT_H
-#define _PRINT_H
+#ifndef _PRINT_H_INCLUDED
+#define _PRINT_H_INCLUDED
 // print the headers for two tables.
 extern void studHeaderPrint();
 extern void bookHeaderPrint();

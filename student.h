@@ -1,5 +1,5 @@
-#ifdef _STUDENT_H
-#define _STUDENT_H
+#ifndef _STUDENT_H_INCLUDED
+#define _STUDENT_H_INCLUDED
 // student operations
 extern void addStud(char* name, char* id, char* passw, char* book, char* booknum);
 extern void signUp();

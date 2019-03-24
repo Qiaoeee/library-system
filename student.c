@@ -2,14 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "student.h"
-#include "librarian.h"
 #include "read.h"
+#include "librarian.h"
 #include "print.h"
+#include "student.h"
 
 void addStud(char* name, char* id, char* passw, char* book, char* booknum)
 {
-	STDU *pTemp = (STDU*)malloc(sizeof(STDU));
+	STUD *pTemp = (STUD*)malloc(sizeof(STUD));
 	strcpy(pTemp->name, name);
 	strcpy(pTemp->id, id);
 	strcpy(pTemp->passw, passw);
@@ -26,13 +26,6 @@ void addStud(char* name, char* id, char* passw, char* book, char* booknum)
 		sTail->pNext = pTemp;
 		sTail = pTemp;
 	}
-	/*
-	printf("%-15s", &pTemp->name);
-	printf("%-15i", &pTemp->id);
-	printf("%-15s", &pTemp->passw);
-	printf("%-20s", &pTemp->book);
-	printf("%-15s", &pTemp->booknum);
-	printf("\n");*/
 }
 
 void signUp()
@@ -63,26 +56,32 @@ int logIn()
 	scanf("%s", id);
 	printf("Please input your password:");
 	scanf("%s", passw);
+	//printf("%s %s %s", name, id, passw);
 	if(identityVertify(name, id, passw) == 1)
 	{
 		return 1;
-	}
-	else
-	{
-		return 0;
 	}
 }
 
 int identityVertify(char* name, char* id, char* passw)
 {
-	STDU* pTemp = sHead;
+	STUD *pTemp = (STUD*)malloc(sizeof(STUD));
+	pTemp = sHead;
+	int a, b, c;
 	while(pTemp != NULL)
 	{
-		if(pTemp->name==name && pTemp->id==id && pTemp->passw==passw)
+		a = strcasecmp(pTemp->name, name);
+		b = strcasecmp(pTemp->id, id);
+		c = strcasecmp(pTemp->passw, passw);
+		if(a==0 && b==0 && c==0)
 		{
+			printf("This student is in the list.\n");
 			return 1;
 		}
+		pTemp = pTemp->pNext;
 	} 
+	printf("This student is not in the list.\n");
+	while(1 == registerConfirm(name, id, passw)){};
 	return 0;
 }
 
@@ -91,17 +90,21 @@ int registerConfirm(char* name, char* id, char* passw)
 	printf("There is no user called\"%s\". Do you want to reegister?\n", name);
 	printf("1. Yes(Using the password above)\n");
 	printf("2. Yes(Using another password)\n");
-	printf("3. Quit");
+	printf("3. Quit\n");
+	printf("Your choice is:");
 	int order = 0;
+	scanf("%d", &order);
 	switch(order)
 	{
 		case 1:
 			addStud(name,id,passw,NULL,NULL);
+			printf("Account created successfully.\n");
 			return 0;
 		case 2:
 			printf("Please input the password:");
 			scanf("%s", passw);
 			addStud(name,id,passw,NULL,NULL);
+			printf("Account created successfully.\n");
 			return 0;
 		case 3:
 			return 0;

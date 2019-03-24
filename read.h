@@ -1,5 +1,5 @@
-#ifdef _READ_H
-#define _READ_H
+#ifndef _READ_H_INCLUDED 
+#define _READ_H_INCLUDED
 // creat two structures for students and books. 
 typedef struct book
 {
@@ -18,12 +18,13 @@ typedef struct student
 	char book[20];
 	char booknum[5];
 	struct student *pNext;
-}STDU;
-// creat head pointers and tail pointers for two linked lists separately.
-extern BOOK *bHead = NULL;
-extern BOOK *bTail = NULL;
-extern STDU *sHead = NULL;
-extern STDU *sTail = NULL;
+}STUD;
+
+extern BOOK *bHead;
+extern BOOK *bTail;
+extern STUD *sHead;
+extern STUD *sTail;
+
 // read files into linked lists
 extern void readStud();
 extern void readBook();

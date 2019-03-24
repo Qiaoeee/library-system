@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "student.h"
-#include "librarian.h"
 #include "read.h"
+#include "librarian.h"
 #include "print.h"
+#include "student.h"
 
 void studHeaderPrint()
 {
@@ -43,7 +43,7 @@ void PrintIdentity()
 	printf("1: I'm a student.\n"); 
 	printf("2: I'm the librarian.\n");
 	printf("3: Quit.\n"); 
-	printf("Your identity:\n");
+	printf("Your identity:");
 }
 
 void PrintLibrarian()
@@ -55,7 +55,7 @@ void PrintLibrarian()
 	printf("3. Add books\n");
 	printf("4. Remove books\n");
 	printf("5. Quit\n\n");
-	printf("Your choice is:\n");
+	printf("Your choice is:");
 } 
 
 void PrintStudent()
@@ -67,5 +67,5 @@ void PrintStudent()
 	printf("3. Borrow books\n");
 	printf("4. Return books\n");
 	printf("5. Quit\n\n");
-	printf("Your choice is:\n");
+	printf("Your choice is:");
 }
