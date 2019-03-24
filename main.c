@@ -1,58 +1,49 @@
+
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct book
-{
-	char *name;      // the name of the book
-	int num;         // how many books 
-	char *booknum;   // the call number of the book
-	char *auth;      // the author's name
-	struct book *next;
-}BOOK;
-
-typedef struct student
-{
-	char *name;
-	int id;
-	char *passw;
-	struct student *next;
-}STDU;
-
-
-
- 
+#include <string.h>
+#include "student.h"
+#include "librarian.h"
+#include "read.h"
+#include "print.h"
 
 int main(int argc, char *argv[]) 
 {
-	char name, id;
-	int iden;
-	printf("\tGreenday Library System \n"); 
-	printf("**********************************************************************\n");
-	printf("Please choose the identity\n"); 
-	printf("1: I'm a student.\n"); 
-	printf("2: I'm the librarian.\n");
-	printf("3: Quit.\n"); 
-	printf("Your identity:"); 
-	scanf("%i", &iden);
-	getchar();
-	switch(iden)
+	int ident, return1 = 1, return2 = 1;
+	int order1 = 0, order2 = 0;
+	PrintIdentity();
+	scanf("%d", &ident);
+	switch(ident)
 	{
 		case 1:
-			printf("Please input your name:");
-			scanf("%s", &name);
-			getchar();
-			printf("Please input your id number:");
-			scanf("%s", &id);
-			getchar();
+			readBook();
+			readStud();
+			while(0 != return1)
+			{
+				if(1 != logIn())
+				{
+					break;
+				}
+				PrintStudent();
+				scanf("%d", &order1);
+				return1 = OperateStudent(order1);
+			}
 			break;
 		case 2:
+			readBook();
+			readStud();
+			while(0 != return2)
+			{
+				PrintLibrarian();
+				scanf("%d", &order2);
+				return2 = OperateLibrarian(order2);
+			}
 			break;
 		case 3:
-			break;
+			return 0;
 		default:
-			printf("Invalid data, please reopen the program and try again.");
+			printf("Invalid data. Please retry.");
 			break;
 	}
-	
 	return 0;
 }
