@@ -15,8 +15,7 @@ typedef struct student
 	char name[20];
 	char id[5];
 	char passw[10];
-	char book[20];
-	char booknum[5];
+	int quan;
 	struct student *pNext;
 }STUD;
 
@@ -24,6 +23,7 @@ extern BOOK *bHead;
 extern BOOK *bTail;
 extern STUD *sHead;
 extern STUD *sTail;
+extern STUD *sNow;
 
 // read files into linked lists
 extern void readStud();

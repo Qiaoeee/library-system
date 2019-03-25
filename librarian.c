@@ -32,11 +32,11 @@ void listUser()
 	studHeaderPrint();
 	while(pTemp != NULL)
 	{
+		char strQuan[15] = {0};
 		printf("%-15s", pTemp->name);
 		printf("%-15s",pTemp->id);
 		printf("%-15s",pTemp->passw);
-		printf("%-20s",pTemp->book);
-		printf("%-15s",pTemp->booknum);	
+		printf("%-15d",pTemp->quan);	
 		printf("\n");
 		pTemp = pTemp->pNext;
 	}

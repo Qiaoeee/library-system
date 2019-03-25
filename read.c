@@ -11,6 +11,7 @@ BOOK *bHead = NULL;
 BOOK *bTail = NULL;
 STUD *sHead = NULL;
 STUD *sTail = NULL;
+STUD *sNow = NULL;
 
 void readStud()
 {
@@ -30,8 +31,7 @@ void readStud()
 		char strName[20] = {0};
 		char strId[3] = {0};
 		char strPassw[10] = {0};
-		char strBook[20] = {0};
-		char strBooknum[15] = {0};
+		char strQuan[15] = {0};
 		for(i = 0; buffer[i] != '\r'; i++)
 		{
 			if(buffer[i] == ',')
@@ -53,14 +53,10 @@ void readStud()
 			}
 			else if(3 == count)
 			{
-				strBook[i-j] = buffer[i];
-			}
-			else if(4 == count)
-			{
-				strBooknum[i-j] = buffer[i];
+				strQuan[i-j] = buffer[i];
 			}
 		} 
-		addStud(strName,strId,strPassw,strBook,strBooknum);
+		addStud(strName,strId,strPassw,atoi(strQuan));
 		
 	}
 	fclose(pStuFile); // to write into the file.
@@ -151,10 +147,10 @@ int OperateStudent(int order)
 			listBook();
 			return 1;
 		case 2:
-			//searchBook();
+			searchBookFunc();
 			return 1;
 		case 3:
-			//borrowBook();
+			borrowBook();
 			return 1;
 		case 4:
 			//returnBook();

@@ -18,10 +18,7 @@ int main(int argc, char *argv[])
 		case 1:
 			readBook();
 			readStud();
-			if(0 ==logIn())
-			{
-				break;
-			}
+			logIn();
 			while(0 != return1)
 			{
 				PrintStudent();
