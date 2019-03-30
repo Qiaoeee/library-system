@@ -2,16 +2,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "read.h"
 #include "librarian.h"
 #include "print.h"
 #include "student.h"
 // creat head pointers and tail pointers for two linked lists separately.
-BOOK *bHead = NULL;
-BOOK *bTail = NULL;
-STUD *sHead = NULL;
-STUD *sTail = NULL;
-STUD *sNow = NULL;
+Book *bHead = NULL;
+Book *bTail = NULL;
+Stud *sHead = NULL;
+Stud *sTail = NULL;
+Stud *sNow = NULL;
 
 void readStud()
 {
@@ -125,10 +126,10 @@ int OperateLibrarian(int order)
 			listUser();
 			return 1;
 		case 3:
-			//IncreaseBook();
+			addBookInTheList();
 			return 1;
 		case 4:
-			//RemoveBook();
+			removeBook();
 			return 1;
 		case 5:
 			return 0;
@@ -153,7 +154,7 @@ int OperateStudent(int order)
 			borrowBook();
 			return 1;
 		case 4:
-			//returnBook();
+			returnBook();
 			return 1;
 		case 5:
 			return 0;
@@ -162,4 +163,108 @@ int OperateStudent(int order)
 			break;
 	}
 	return 0;
+}
+
+void saveInStuFile()
+{
+	if(NULL == sHead)
+	{
+		printf("There is no student.\n");
+		return;
+	}
+	FILE* pFile = NULL;
+	pFile = fopen("student.txt", "wb+");
+	if(NULL == pFile)
+	{
+		printf("Open failed.\n");
+		return;
+	}
+	Stud *pTemp = (Stud*)malloc(sizeof(Stud));
+	pTemp = sHead;
+	char string[70] = {0};
+	char strQuan[5] = {0};
+	char header[70] = "Name,ID,Password,Book quantity\r\n";
+	fwrite(header, 1, strlen(header), pFile);
+	while(NULL != pTemp)
+	{
+		strcpy(string, pTemp->name);
+		strcat(string, ",");
+		strcat(string, pTemp->id);
+		strcat(string, ",");
+		strcat(string, pTemp->passw);
+		strcat(string, ",");
+		itoa(pTemp->quan, strQuan, 10);
+		strcat(string, strQuan);
+		strcat(string, "\r\n");
+		fwrite(string, 1, strlen(string), pFile);
+		pTemp = pTemp->pNext;
+	}
+	fclose(pFile);
+	printf("Operate successfully.\n");
+} 
+
+void saveInBookFile()
+{
+	if(NULL == bHead)
+	{
+		printf("There is no student.\n");
+		return;
+	}
+	FILE* pFile = NULL;
+	pFile = fopen("book.txt", "wb+");
+	if(NULL == pFile)
+	{
+		printf("Open failed.\n");
+		return;
+	}
+	Book *pTemp = (Book*)malloc(sizeof(Book));
+	pTemp = bHead;
+	char string[70] = {0};
+	char strQuan[5] = {0};
+	char header[70] = "Book,Number,Quantity,Author\r\n";
+	fwrite(header, 1, strlen(header), pFile);
+	while(NULL != pTemp)
+	{
+		strcpy(string, pTemp->name);
+		strcat(string, ",");
+		strcat(string, pTemp->booknum);
+		strcat(string, ",");
+		itoa(pTemp->quan, strQuan, 10);
+		strcat(string, strQuan);
+		strcat(string, ",");
+		strcat(string, pTemp->auth);
+		strcat(string, "\r\n");
+		fwrite(string, 1, strlen(string), pFile);
+		pTemp = pTemp->pNext;
+	}
+	fclose(pFile);
+	printf("Operate successfully.\n");
+}
+
+void freeStud()
+{
+	Stud *pTemp = (Stud*)malloc(sizeof(Stud));
+	pTemp = sHead;
+	while(NULL != pTemp)
+	{
+		Stud* pFree = pTemp;
+		pTemp = pTemp->pNext;
+		free(pFree);
+	}
+	sHead = NULL;
+	sTail = NULL;
+}
+
+void freeBook()
+{
+	Book *pTemp = (Book*)malloc(sizeof(Book));
+	pTemp = bHead;
+	while(NULL != pTemp)
+	{
+		Book* pFree = pTemp;
+		pTemp = pTemp->pNext;
+		free(pFree);
+	}
+	bHead = NULL;
+	bTail = NULL;
 }

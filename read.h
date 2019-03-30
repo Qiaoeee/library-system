@@ -8,7 +8,7 @@ typedef struct book
 	char booknum[5];   // the call number of the book
 	char auth[20];      // the author's name
 	struct book *pNext;
-}BOOK;
+}Book;
 
 typedef struct student
 {
@@ -17,13 +17,21 @@ typedef struct student
 	char passw[10];
 	int quan;
 	struct student *pNext;
-}STUD;
+}Stud;
 
-extern BOOK *bHead;
-extern BOOK *bTail;
-extern STUD *sHead;
-extern STUD *sTail;
-extern STUD *sNow;
+typedef struct record
+{
+	char stuname[20];
+	char bookname[20];
+	char booknum[20];
+	char operation[10];
+}Rec; 
+
+extern Book *bHead;
+extern Book *bTail;
+extern Stud *sHead;
+extern Stud *sTail;
+extern Stud *sNow;
 
 // read files into linked lists
 extern void readStud();
@@ -32,4 +40,8 @@ extern void PrintStudent();
 // switch structures
 extern int OperateLibrarian(int order);
 extern int OperateStudent(int order);
+extern void saveInStuFile();
+extern void saveInBookFile();
+extern void freeStud();
+extern void freeBook();
 #endif

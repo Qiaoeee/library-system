@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "read.h"
 #include "librarian.h"
 #include "print.h"
@@ -18,13 +19,16 @@ int main(int argc, char *argv[])
 		case 1:
 			readBook();
 			readStud();
-			logIn();
-			while(0 != return1)
+			if(1 == logIn())
 			{
-				PrintStudent();
-				scanf("%d", &order1);
-				return1 = OperateStudent(order1);
+				while(0 != return1)
+				{
+					PrintStudent();
+					scanf("%d", &order1);
+					return1 = OperateStudent(order1);
+				}
 			}
+			
 			break;
 		case 2:
 			readBook();
@@ -42,5 +46,9 @@ int main(int argc, char *argv[])
 			printf("Invalid data. Please retry.");
 			break;
 	}
+	saveInStuFile();
+	saveInBookFile();
+	freeStud();
+	freeBook();
 	return 0;
 }
