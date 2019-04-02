@@ -5,6 +5,7 @@ typedef struct book
 {
 	char name[20];      // the name of the book
 	int quan;         // how many books 
+	int totquan;
 	char booknum[5];   // the call number of the book
 	char auth[20];      // the author's name
 	struct book *pNext;
@@ -13,7 +14,7 @@ typedef struct book
 typedef struct student
 {
 	char name[20];
-	char id[5];
+	char id[4];
 	char passw[10];
 	int quan;
 	struct student *pNext;

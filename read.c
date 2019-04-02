@@ -30,9 +30,10 @@ void readStud()
 		int j = 0;
 		int line = 0;
 		char strName[20] = {0};
-		char strId[3] = {0};
+		char strId[5] = {0};
 		char strPassw[10] = {0};
 		char strQuan[15] = {0};
+		int intQuan = 0; 
 		for(i = 0; buffer[i] != '\r'; i++)
 		{
 			if(buffer[i] == ',')
@@ -57,7 +58,8 @@ void readStud()
 				strQuan[i-j] = buffer[i];
 			}
 		} 
-		addStud(strName,strId,strPassw,atoi(strQuan));
+		intQuan = atoi(strQuan);
+		addStud(strName,strId,strPassw,intQuan);
 		
 	}
 	fclose(pStuFile); // to write into the file.
@@ -79,8 +81,9 @@ void readBook()
 		int j = 0; 
 		char strBook[20] = {0};
 		char strBooknum[7] = {0};
-		char strQuan[3] = {0};
 		char strAuth[10] = {0};
+		char strQuan[3] = {0};
+		char strTotQuan[3] = {0};
 		for(i = 0; buffer[i] != '\r'; i++)
 		{
 			if(buffer[i] == ',')
@@ -98,19 +101,18 @@ void readBook()
 			}
 			else if(2 == count)
 			{
-				strQuan[i-j] = buffer[i];
+				strAuth[i-j] = buffer[i];
 			}
 			else if(3 == count)
 			{
-				strAuth[i-j] = buffer[i];
+				strQuan[i-j] = buffer[i];
+			}
+			else if(4 == count)
+			{
+				strTotQuan[i-j] = buffer[i];
 			}
 		} 
-		//printf("%-15s", strBook);
-		//printf("%-15s", strBooknum);
-		//printf("%-15s", strQuan);
-		//printf("%-20s", strAuth);
-		//printf("\n");
-		addBook(strBook,strBooknum,strAuth,atoi(strQuan));
+		addBook(strBook,strBooknum,strAuth,atoi(strQuan),atoi(strTotQuan));
 	}
 	fclose(pBookFile); // to write into the file.
 }
@@ -181,12 +183,12 @@ void saveInStuFile()
 	}
 	Stud *pTemp = (Stud*)malloc(sizeof(Stud));
 	pTemp = sHead;
-	char string[70] = {0};
-	char strQuan[5] = {0};
 	char header[70] = "Name,ID,Password,Book quantity\r\n";
 	fwrite(header, 1, strlen(header), pFile);
 	while(NULL != pTemp)
 	{
+		char string[70] = {0};
+		char strQuan[5] = {0};
 		strcpy(string, pTemp->name);
 		strcat(string, ",");
 		strcat(string, pTemp->id);
@@ -219,20 +221,24 @@ void saveInBookFile()
 	}
 	Book *pTemp = (Book*)malloc(sizeof(Book));
 	pTemp = bHead;
-	char string[70] = {0};
-	char strQuan[5] = {0};
-	char header[70] = "Book,Number,Quantity,Author\r\n";
+	char header[70] = "Book,Number,Author,Quantity,Total Quantity\r\n";
 	fwrite(header, 1, strlen(header), pFile);
 	while(NULL != pTemp)
 	{
+		char string[70] = {0};
+		char strQuan[5] = {0};
+		char strTotQuan[5] = {0};
+		itoa(pTemp->quan, strQuan, 10);
+		itoa(pTemp->totquan, strTotQuan, 10);
 		strcpy(string, pTemp->name);
 		strcat(string, ",");
 		strcat(string, pTemp->booknum);
 		strcat(string, ",");
-		itoa(pTemp->quan, strQuan, 10);
+		strcat(string, pTemp->auth);
+		strcat(string, ",");
 		strcat(string, strQuan);
 		strcat(string, ",");
-		strcat(string, pTemp->auth);
+		strcat(string, strTotQuan);
 		strcat(string, "\r\n");
 		fwrite(string, 1, strlen(string), pFile);
 		pTemp = pTemp->pNext;

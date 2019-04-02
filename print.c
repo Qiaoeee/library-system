@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "read.h"
 #include "librarian.h"
 #include "print.h"
@@ -18,7 +19,6 @@ void studHeaderPrint()
 	printf("%-15s", strName);
 	printf("%-15s",strId);
 	printf("%-15s",strPassw);
-	printf("%-20s",strBook);
 	printf("%-15s",strQuan);	
 	printf("\n");
 }
@@ -28,12 +28,14 @@ void bookHeaderPrint()
 	char strBook[] = {"Book"};
 	char strBooknum[] = {"Number"};
 	char strQuan[] = {"Quantity"};
+	char strTotQuan[] = {"Total Quantity"};
 	char strAuth[] = {"Author"}; 
 	printf("********************************************************************************\n");
 	printf("%-15s", strBook);
 	printf("%-15s", strBooknum);	
-	printf("%-15s", strQuan);
 	printf("%-20s", strAuth);
+	printf("%-15s", strQuan);
+	printf("%-15s", strTotQuan);
 	printf("\n");
 }
 
