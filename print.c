@@ -8,6 +8,15 @@
 #include "print.h"
 #include "student.h"
 
+void printHelp()
+{
+	printf("Q: What can I do through this system?\n");
+	printf("A: For the librarian, you can add and remove books from the library, list all books and list all registered users.\n");
+	printf("For the users, you can register with the library, list all books, search for books, borrow a book and return a book.\n");
+	printf("Q: Do I have some constraints for borrowing books?\n");
+	printf("A: Each student can only borrow 10 books at most at the same time.\n");
+} 
+
 void studHeaderPrint()
 {
 	char strName[] = {"Name"};
@@ -39,7 +48,7 @@ void bookHeaderPrint()
 	printf("\n");
 }
 
-void PrintIdentity()
+void printIdentity()
 {
 	printf("\tGreenday Library System \n"); 
 	printf("********************************************************************************\n");
@@ -50,7 +59,7 @@ void PrintIdentity()
 	printf("Your identity:");
 }
 
-void PrintLibrarian()
+void printLibrarian()
 {
 	printf("********************************************************************************\n");
 	printf("What do you want to do?\n");
@@ -58,11 +67,12 @@ void PrintLibrarian()
 	printf("2. List all users\n");
 	printf("3. Add books\n");
 	printf("4. Remove books\n");
-	printf("5. Quit\n\n");
+	printf("5. Help\n");
+	printf("6. Quit\n\n");
 	printf("Your choice is:");
 } 
 
-void PrintStudent()
+void printStudent()
 {
 	printf("********************************************************************************\n");
 	printf("What do you want to do?\n");
@@ -70,6 +80,7 @@ void PrintStudent()
 	printf("2. Search a book\n");
 	printf("3. Borrow books\n");
 	printf("4. Return books\n");
-	printf("5. Quit\n\n");
+	printf("5. Help\n");
+	printf("6. Quit\n\n");
 	printf("Your choice is:");
 }

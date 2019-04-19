@@ -117,7 +117,7 @@ void readBook()
 	fclose(pBookFile); // to write into the file.
 }
 
-int OperateLibrarian(int order)
+int operateLibrarian(int order)
 {
 	switch(order)
 	{
@@ -134,6 +134,9 @@ int OperateLibrarian(int order)
 			removeBook();
 			return 1;
 		case 5:
+			printHelp();
+			return 1;
+		case 6:
 			return 0;
 		default:
 			printf("Invalid data.");
@@ -142,7 +145,7 @@ int OperateLibrarian(int order)
 	return 0;
 }
 
-int OperateStudent(int order)
+int operateStudent(int order)
 {
 	switch(order)
 	{
@@ -159,6 +162,9 @@ int OperateStudent(int order)
 			returnBook();
 			return 1;
 		case 5:
+			printHelp();
+			return 1;
+		case 6:
 			return 0;
 		default:
 			printf("Invalid data.");
@@ -202,7 +208,7 @@ void saveInStuFile()
 		pTemp = pTemp->pNext;
 	}
 	fclose(pFile);
-	printf("Operate successfully.\n");
+	//printf("Operate successfully.\n");
 } 
 
 void saveInBookFile()
@@ -244,7 +250,7 @@ void saveInBookFile()
 		pTemp = pTemp->pNext;
 	}
 	fclose(pFile);
-	printf("Operate successfully.\n");
+	//printf("Operate successfully.\n");
 }
 
 void freeStud()

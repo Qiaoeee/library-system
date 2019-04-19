@@ -1,4 +1,4 @@
-Book, Number,Quantity,Author
-book1,0001,2,Jack
-book2,0002,3,Mike
-book3,0003,1,Sam
+Book,Number,Author,Quantity,Total Quantity
+book1,0001,Jack,2,2
+book2,0002,Mike,2,3
+book3,0003,Sam,4,5
